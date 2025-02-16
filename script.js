@@ -12,28 +12,36 @@ document.addEventListener("DOMContentLoaded", () => {
   // Audio setup
   //const audio = new Audio("Youre Gonna Live Forever In Me.mp3");
   const audio = new Audio("through the years.mp3");
-  const playlist = [
-    "Youre Gonna Live Forever In Me.mp3",
-    "through the years.mp3",
-  ];
+  const playlist = ["silence.mp3", "Youre Gonna Live Forever In Me.mp3"];
   let currentTrack = 0;
 
-  // Create a play button for user interaction
+  // Create a container for the buttons
+  const buttonContainer = document.createElement("div");
+  buttonContainer.style.display = "flex";
+  buttonContainer.style.justifyContent = "center"; // Center the buttons
+  buttonContainer.style.gap = "10px"; // Space between buttons
+  buttonContainer.style.position = "absolute";
+  buttonContainer.style.top = "20px";
+  buttonContainer.style.left = "50%";
+  buttonContainer.style.transform = "translateX(-50%)"; // Center align
+
+  // Create Play Music button
   const playButton = document.createElement("button");
   playButton.textContent = "Play Music 🎵";
-  playButton.style.position = "absolute";
-  playButton.style.top = "20px";
-  playButton.style.left = "80%"; // Adjust this to match the slideshow button position
   playButton.style.padding = "10px 15px";
-  playButton.style.background = "#3a506b";
+  playButton.style.background = "#ff7f7f";
   playButton.style.color = "white";
   playButton.style.border = "none";
   playButton.style.borderRadius = "20px";
   playButton.style.cursor = "pointer";
   playButton.style.fontSize = "14px";
   playButton.style.fontWeight = "bold";
-  playButton.style.backgroundColor = "#ff7f7f";
-  document.body.appendChild(playButton);
+
+  // Append the play button and the slideshow button to the container
+  buttonContainer.appendChild(playButton);
+
+  // Append the container to the body
+  document.body.appendChild(buttonContainer);
 
   playButton.addEventListener("click", () => {
     audio.play().catch((error) => console.log("Audio playback failed:", error));
@@ -43,10 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Play next song in the playlist
   audio.addEventListener("ended", () => {
     currentTrack++;
-    if (currentTrack < playlist.length) {
-      audio.src = playlist[currentTrack];
-      audio.play();
+    if (currentTrack >= playlist.length) {
+      currentTrack = 0; // Loop back to the first song if all tracks are played
     }
+    audio.src = playlist[currentTrack];
+    audio.load(); // Ensure the new audio file is loaded
+    audio.play().catch((error) => console.log("Audio playback failed:", error));
   });
 
   // Check for saved theme preference

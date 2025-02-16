@@ -1,0 +1,250 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+:root {
+  --background-color: #f8f9fa;
+  --header-background: #2b2929;
+  --text-color: #333;
+  --header-text-color: white;
+  --button-background: #ff7f7f; /* Light red */
+  --button-hover: #ff6666; /* Slightly darker red for hover */
+  transition: all 0.3s ease-in-out;
+}
+
+[data-theme="dark"] {
+  --background-color: #1a1a1a;
+  --header-background: #000000;
+  --text-color: #ffffff;
+  --header-text-color: #ffffff;
+  --button-background: #ff6666; /* Slightly darker red for dark mode */
+  --button-hover: #ff7f7f; /* Light red for hover in dark mode */
+}
+
+[data-theme="dark"] .wakeandfuneral {
+  color: var(--header-text-color);
+}
+
+body {
+  background-color: var(--background-color);
+  text-align: center;
+  color: var(--text-color);
+  transition: background-color 0.3s ease;
+}
+
+.header {
+  padding: 20px;
+  background: var(--header-background);
+  color: var(--header-text-color);
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.wakeandfuneral {
+  font-size: 1em;
+  font-weight: bold;
+  font-family: "Imperial Script", cursive;
+  font-style: normal;
+  color: black; /* Default color for light mode */
+}
+
+h1 {
+  font-size: 4.5em;
+  font-family: "Imperial Script", cursive;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h1 .wakeandfuneral {
+  font-size: 4.5em;
+  font-family: "Imperial Script", cursive;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+/* Control buttons wrapper styles */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 100;
+  gap: 15px; /* Add space between toggle and button */
+}
+
+/* Slideshow button styles */
+.slideshow-button-wrapper {
+  position: fixed;
+  right: 100px;
+  top: 20px;
+  z-index: 100;
+}
+
+#start-slideshow {
+  background-color: var(--button-background);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 17px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+#start-slideshow:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#start-slideshow:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  gap: 15px;
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+
+.options {
+  margin-bottom: 75px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: auto;
+  gap: 15px;
+  max-width: 90%;
+  margin: auto;
+  padding: 20px;
+}
+
+.gallery2 img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  cursor: pointer;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+.gallery img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.gallery2 img:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.lightbox img {
+  max-width: 80%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Dark Mode Toggle Styles */
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #ff7f7f; /* Light red for slider */
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

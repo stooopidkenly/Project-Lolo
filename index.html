@@ -14,6 +14,19 @@
     <title>Bienvinido's Gallery</title>
   </head>
   <body>
+    <div id="login-overlay">
+      <div class="login-container">
+        <h2>Welcome to Bienvinido's Gallery</h2>
+        <div class="login-form">
+          <input type="password" id="password" placeholder="Enter password" />
+          <button onclick="checkPassword()">Enter Gallery</button>
+          <p id="error-message" style="color: red; display: none">
+            Incorrect password. Please try again.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="options">
       <div class="theme-switch-wrapper">
         <label class="theme-switch" for="checkbox">

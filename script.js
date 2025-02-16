@@ -1,3 +1,18 @@
+function checkPassword() {
+  const password = document.getElementById("password").value;
+  const correctPassword = "lolopogi123";
+  const errorMessage = document.getElementById("error-message");
+
+  if (password === correctPassword) {
+    document.getElementById("login-overlay").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+    // Store login state in sessionStorage
+    sessionStorage.setItem("isLoggedIn", "true");
+  } else {
+    errorMessage.style.display = "block";
+    document.getElementById("password").value = "";
+  }
+}
 document.addEventListener("DOMContentLoaded", () => {
   const gallery = document.querySelector(".gallery");
   const gallery2 = document.querySelector(".gallery2");
@@ -9,8 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let isSlideShowRunning = false;
   let slideShowInterval;
 
+  if (sessionStorage.getItem("isLoggedIn") === "true") {
+    document.getElementById("login-overlay").style.display = "none";
+    document.getElementById("main-content").style.display = "block";
+  }
+
+  // Add event listener for Enter key
+  document
+    .getElementById("password")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+
   // Audio setup
-  //const audio = new Audio("Youre Gonna Live Forever In Me.mp3");
   const audio = new Audio("through the years.mp3");
   const playlist = ["silence.mp3", "Youre Gonna Live Forever In Me.mp3"];
   let currentTrack = 0;

@@ -1,6 +1,6 @@
 function checkPassword() {
   const password = document.getElementById("password").value;
-  const correctPassword = "lolopogi123";
+  const correctPassword = "123";
   const errorMessage = document.getElementById("error-message");
 
   if (password === correctPassword) {
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.querySelector(".close");
   const toggleSwitch = document.querySelector("#checkbox");
   const slideshowButton = document.querySelector("#start-slideshow");
+  const videoContainer = document.querySelector(".video3");
   let isSlideShowRunning = false;
   let slideShowInterval;
 
@@ -98,9 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Array to store all image elements
   const allImages = [];
+  const allVideos = [];
 
   // Generate gallery images dynamically
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 33; i++) {
     const img = document.createElement("img");
     img.src = `images/${i}.jpg`;
     img.alt = `Image ${i}`;
@@ -124,12 +126,37 @@ document.addEventListener("DOMContentLoaded", () => {
     allImages.push(img.src);
   }
 
+  for (let i = 200; i <= 209; i++) {
+    const videoWrapper = document.createElement("div"); // Wrapper for consistent styling
+    videoWrapper.classList.add("video-preview");
+
+    const video = document.createElement("video");
+    video.src = `videos/${i}.mp4`;
+    video.alt = `Video ${i}`;
+    video.controls = false; // Hide controls for preview
+    video.classList.add("preview-video"); // Apply styles
+    video.addEventListener("click", () => {
+      lightbox.innerHTML = ""; // Clear previous content
+      const lightboxVideo = document.createElement("video");
+      lightboxVideo.src = video.src;
+      lightboxVideo.controls = true;
+      lightboxVideo.autoplay = true;
+      lightboxVideo.classList.add("lightbox-video");
+      lightbox.appendChild(lightboxVideo);
+      lightbox.style.display = "flex";
+    });
+
+    videoWrapper.appendChild(video);
+    videoContainer.appendChild(videoWrapper);
+    allVideos.push(video.src);
+  }
+
   // Slideshow functionality
   function startSlideshow() {
     if (isSlideShowRunning) {
       clearInterval(slideShowInterval);
       lightbox.style.display = "none";
-      slideshowButton.textContent = "Start Slideshow";
+      slideshowButton.textContent = "Start";
       isSlideShowRunning = false;
       return;
     }
